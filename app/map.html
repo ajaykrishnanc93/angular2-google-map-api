@@ -1,11 +1,21 @@
-  <h1>{{ title }}</h1>
 
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-
-<sebm-google-map [latitude]="lat" [longitude]="lng">
-  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
-</sebm-google-map>
+<sebm-google-map 
+    [latitude]="9.988076"
+    [longitude]="76.320734"
+    [zoom]="12">
+    <div *ngFor="let product of products">
+      <sebm-google-map-marker *ngIf="product.lat>=10" [label]="product.pname" (markerClick)="marker()" iconUrl='http://maps.google.com/mapfiles/ms/icons/blue.png'
+        [latitude]="product.lat" 
+        [longitude]="product.lng" >
+      <sebm-google-map-info-window   #infowindow [disableAutoPan]="true" > <p>Product Name: {{ product.pname }}</p><p>Latitude: {{product.lat}}</p><p>Longitude: {{product.lng}}</p><p><a  href="#" [routerLink]="['/Details', product._id]">Details</a> </p></sebm-google-map-info-window>
+      </sebm-google-map-marker>
+   
+   <sebm-google-map-marker id="marker" *ngIf="product.lat<10" [label]="product.pname" (markerClick)="marker()" iconUrl='http://maps.google.com/mapfiles/ms/icons/orange.png'
+        [latitude]="product.lat" 
+        [longitude]="product.lng">
+      <sebm-google-map-info-window   #infowindow [disableAutoPan]="true" > <p>Product Name: {{ product.pname }}</p><p>Latitude: {{product.lat}}</p><p>Longitude: {{product.lng}}</p><p><a  href="#" [routerLink]="['/Details', product._id]">Details</a> </p></sebm-google-map-info-window>
+      </sebm-google-map-marker>
+    </div>
+   
+  </sebm-google-map>
  
-
-

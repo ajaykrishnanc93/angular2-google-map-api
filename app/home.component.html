@@ -64,27 +64,14 @@
 				</tr>
 </tbody>
 		
-		 <form  *ngIf="isMap" >
-	<sebm-google-map 
-    [latitude]="9.9971"
-    [longitude]="76.3028"
-    [zoom]="13">
-    <div *ngFor="let product of products">
-      <sebm-google-map-marker [label]="product.pname" (markerClick)="updateDiv(product, infowindow)" 
-        *ngIf="product.lat"
-        [latitude]="product.lat"
-        [longitude]="product.lng">
-      
-        <sebm-google-map-info-window #infowindow [disableAutoPan]="true">{{ product.pname }}</sebm-google-map-info-window>
-      </sebm-google-map-marker>
-    
-    </div>
-   
-  </sebm-google-map>
-<button (click)="cancelMap()"> Cancel</button>
+ <form  *ngIf="isMap" >
+ <map [lat]='lat' [lng]='lng' [pname]='pname'></map>
+ <button (click)="cancelMap()"> Cancel</button>
+ 
  </form>
+  
 
-   <form  *ngIf="isAdding" class="form-inline" [formGroup]="addProductForm" (ngSubmit)="submitAdd()">
+  <form  *ngIf="isAdding" class="form-inline" [formGroup]="addProductForm" (ngSubmit)="submitAdd()">
 			<div  class="form-group">
 			    <input class="form-control" type="text" name="pname" formControlName="pname" placeholder="Name"  >
 		
@@ -108,18 +95,7 @@
 
 
 
- 
 
-
-
-
-
-
-
-
-
-
- 
 
 
 

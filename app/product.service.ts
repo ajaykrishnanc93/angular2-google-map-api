@@ -32,4 +32,10 @@ enableSearching(name) {
      return this.http.delete("/product/"+product._id, this.options);
     }
 
+	getProduct(_id){ 
+		return this.http.get("/product/"+_id).map(res => res.json());
+	}
+	
+	
+	
     }

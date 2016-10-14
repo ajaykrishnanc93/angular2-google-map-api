@@ -151,10 +151,6 @@ enableMap(){
 		);
 	}
 	
-marker() {
- 
-
-} 
 
 
  }

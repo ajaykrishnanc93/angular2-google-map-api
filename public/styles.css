@@ -53,13 +53,13 @@ border-right: 1px solid #000;text-align: left;}
  background-color: hsla(120, 100%, 50%, 0.3);
 }
 
-input[type=text] {
+ input[type=text] {
    border: 1px solid red; 
 }
 
 input[type=number] {
    border: 1px solid red; 
-}
+} 
 
 
 .alert {
@@ -76,7 +76,25 @@ input[type=number] {
   height: 500px;
 }
 
-/*.sebm-google-map-container {
+/* .sebm-google-map-container {
   width: 400px;
   height: 400px;
-}*/
+} */
+.gm-style .gm-style-iw {
+   border:2px solid black;  
+    margin-top: 8px;  
+    background:#095;  
+    color:#FFF;  
+    font-family:Arial, Helvetica, sans-serif;  
+    font-size:12px;  
+    padding: .5em 1em;  
+    -webkit-border-radius: 2px;  
+    -moz-border-radius: 2px;  
+    border-radius: 2px;  
+    text-shadow:0 -1px #000000;  
+    -webkit-box-shadow: 0 0  8px #000;  
+    box-shadow: 0 0 8px #000; 
+   }
+   
+
+ 

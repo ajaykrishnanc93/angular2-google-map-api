@@ -1,19 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var app = express();
 
-
-var url ='mongodb://localhost:27017/test';
+var url ='mongodb://localhost:27017/details';
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb://localhost:27017/details');
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
+ var detailSchema = mongoose.Schema({
+    pdesc: String,
+    pcost: Number,
+    ptype: String
+    
+}); 
 var productSchema = mongoose.Schema({
     pname: String,
     lat: Number,
     lng: Number
     
 });
-var Product = mongoose.model('Product', productSchema);
+
+
+var Detail = mongoose.model('Detail', detailSchema,'details');
+var Product = mongoose.model('Product', productSchema,'products');
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log('Connected to MongoDB');
@@ -43,14 +53,16 @@ db.collection('products').createIndex({pname:"text"});
             if(err) return console.error(err);
             res.status(200).json(obj);
         });
-     });
+     }); 
   
     router.route('/product/:id').get( function(req, res) {
         Product.findOne({_id: req.params.id}, function (err, obj) {
             if(err) return console.error(err);
             res.json(obj);
-        })
-     });
+      
+	   })
+    
+	});
 
     
     router.route('/product/:id').put( function(req, res) {
@@ -68,14 +80,23 @@ db.collection('products').createIndex({pname:"text"});
             res.sendStatus(200);
         });
      });
-
-    router.route('/products/:name').get( function(req, res) {
+ 
+     router.route('/products/:name').get( function(req, res) {
          Product.find({$text:{$search: req.params.name}}, function(err, obj) {
            if(err) return console.error(err);
             res.json(obj);
         })
-     }); 
+     });  
         
+  router.route('/productss/:pid').get( function(req, res) {
+        Detail.findOne({id: req.params.pid}, function(err, obj) {
+           if(err) return console.error(err);
+            res.json(obj);
+       
+		})
+     });  
+        
+  
   
 	
 	 router.route('/*').get(function(req, res) {
